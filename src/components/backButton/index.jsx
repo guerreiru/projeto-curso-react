@@ -13,11 +13,17 @@ const StyledButton = styled.button`
   border-radius: 4px;
 `;
 
-export function BackButton({ children, ...props }) {
+export function BackButton({ children, route, ...props }) {
   const navigate = useNavigate();
 
+  function handleNavigate() {
+    const _route = route || -1;
+
+    navigate(_route);
+  }
+
   return (
-    <StyledButton onClick={() => navigate(-1)} {...props}>
+    <StyledButton onClick={handleNavigate} {...props}>
       {children && children}
       {!children && <CaretLeft size={20} color="#f7f7f7" weight="bold" />}
     </StyledButton>
@@ -26,4 +32,5 @@ export function BackButton({ children, ...props }) {
 
 BackButton.propTypes = {
   children: PropTypes.node,
+  route: PropTypes.string,
 };

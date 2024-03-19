@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ManageTasksImg from "../../assets/step1.svg";
 import CreateRoutineImg from "../../assets/step2.svg";
 import OrganizeTasksImg from "../../assets/step3.svg";
@@ -58,8 +58,9 @@ function handleRenderStep(idx) {
   );
 }
 
-export function Onboading({ showStart }) {
+export function Onboarding() {
   const [step, setStep] = useState(0);
+  const navigate = useNavigate();
 
   const handleNextStep = (step) => {
     if (step < steps.length) {
@@ -74,11 +75,11 @@ export function Onboading({ showStart }) {
   };
 
   const handleGetStart = () => {
-    showStart(2);
+    navigate("/start");
   };
 
   return (
-    <Container>
+    <Container className="container">
       <SkipButtonWrapper>
         <Button variant="secondary" onClick={handleGetStart}>
           PULAR
@@ -100,7 +101,3 @@ export function Onboading({ showStart }) {
     </Container>
   );
 }
-
-Onboading.propTypes = {
-  showStart: PropTypes.func,
-};

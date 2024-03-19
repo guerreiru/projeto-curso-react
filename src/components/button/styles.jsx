@@ -33,12 +33,4 @@ export const StyledButton = styled.button`
   width: 100%;
   max-width: 600px;
   ${({ $variant }) => handleVariant($variant)};
-
-  &:hover {
-    filter: brightness(0.9);
-  }
-
-  &:disabled {
-    filter: brightness(0.6);
-  }
 `;

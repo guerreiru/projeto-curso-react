@@ -4,7 +4,7 @@ import { theme } from "../../styles/theme";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 24px;
+  padding: 16px 24px;
   position: relative;
 
   h2 {

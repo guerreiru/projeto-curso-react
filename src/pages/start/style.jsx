@@ -8,7 +8,7 @@ export const Container = styled.div`
 `;
 
 export const SkipButtonWrapper = styled.div`
-  padding: 24px;
+  padding: 16px 24px;
   cursor: pointer;
 `;
 

@@ -6,12 +6,12 @@ import { Heading } from "../../components/heading";
 import { Text } from "../../components/text";
 import { Container, Footer, Header, SkipButtonWrapper } from "./style";
 
-export function Start({ setStep, step }) {
+export function Start() {
   const navigate = useNavigate();
 
   return (
-    <Container>
-      <SkipButtonWrapper onClick={() => setStep(step - 1)}>
+    <Container className="container">
+      <SkipButtonWrapper>
         <BackButton />
       </SkipButtonWrapper>
 
@@ -23,9 +23,9 @@ export function Start({ setStep, step }) {
       </Header>
 
       <Footer>
-        <Button onClick={() => navigate("login")}>LOGIN</Button>
+        <Button onClick={() => navigate("/login")}>LOGIN</Button>
 
-        <Button onClick={() => navigate("registration")} variant="outline">
+        <Button onClick={() => navigate("/registration")} variant="outline">
           CRIAR CONTA
         </Button>
       </Footer>

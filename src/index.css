@@ -30,6 +30,14 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  filter: brightness(0.9);
+}
+
+button:disabled {
+  filter: brightness(0.6);
+}
+
 img {
   width: 100%;
 }
@@ -48,6 +56,34 @@ img {
 
 .container {
   max-width: 600px;
-  height: 100vh;
+  height: 100%;
   margin: 0 auto;
 }
+
+.container-full {
+  height: 100%;
+  margin: 0 auto;
+}
+
+/* Estilos para navegadores WebKit (como Chrome/Safari) */
+::-webkit-scrollbar {
+  width: 4px; /* Largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #8687e7; /* Cor do indicador de rolagem (thumb) */
+  border-radius: 4px; /* Borda arredondada */
+}
+
+/* Estilos para navegadores Firefox */
+/* Nota: No Firefox, é necessário especificar a cor da barra inteira, não apenas o indicador de rolagem */
+/* Você pode precisar adicionar -moz- prefixo para navegadores Firefox mais antigos */
+scrollbar-color: #8687e7 transparent; /* Cor da barra de rolagem */
+scrollbar-width: thin; /* Largura fina */
+
+/* Estilos para navegadores IE/Edge */
+/* Nota: No IE/Edge, é necessário especificar a cor da barra inteira, não apenas o indicador de rolagem */
+/* Você pode precisar adicionar o prefixo -ms- */
+-ms-overflow-style: none; /* Desabilita a barra de rolagem padrão do IE/Edge */
+scrollbar-color: #8687e7 transparent; /* Cor da barra de rolagem */
+scrollbar-width: thin; /* Largura fina */

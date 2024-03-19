@@ -4,6 +4,7 @@ export const theme = {
     mediumGray: "#979797",
     darkCharcoalGray: "#535353",
     charcoalGray: "#1d1d1d",
+    darkSilverGray: "#363636",
     primaryPurple: "#8687E7",
     purple500: "rgba(134,135,231,0.5)",
     white400: "rgba(255,255,255,0.4)",
