@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../../styles/theme";
 
 export const ModalOverlay = styled.div`
   position: fixed;
@@ -12,18 +13,19 @@ export const ModalOverlay = styled.div`
   align-items: center;
 
   .modal {
-    background-color: white;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    background-color: ${theme.colors.darkSilverGray};
+    border-radius: 16px;
 
     h2 {
       margin-top: 0;
     }
 
-    form {
+    .form {
       display: flex;
       flex-direction: column;
+      margin-top: 16px;
     }
 
     input {
@@ -38,25 +40,15 @@ export const ModalOverlay = styled.div`
     }
 
     .modal-buttons {
-      display: flex;
-      justify-content: space-between;
+      align-self: flex-end;
       margin-top: 10px;
+      color: ${theme.colors.primaryPurple};
+      cursor: pointer;
+      width: fit-content;
+    }
 
-      button {
-        padding: 8px 15px;
-        border: none;
-        border-radius: 3px;
-        cursor: pointer;
-
-        &:nth-child(1) {
-          background-color: #ccc;
-        }
-
-        &:nth-child(2) {
-          background-color: #007bff;
-          color: white;
-        }
-      }
+    @media (max-width: 768px) {
+      width: 80%;
     }
   }
 `;

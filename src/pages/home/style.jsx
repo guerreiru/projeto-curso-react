@@ -14,8 +14,10 @@ export const Container = styled.div`
   flex-direction: column;
 
   .content {
-    text-align: center;
     flex: 1;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
 
     .tasks-list {
       overflow-x: auto;
@@ -39,4 +41,8 @@ export const Container = styled.div`
     left: 0;
     right: 0;
   }
+`;
+
+export const NoData = styled.div`
+  text-align: center;
 `;

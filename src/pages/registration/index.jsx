@@ -13,12 +13,17 @@ export function Registration() {
 
   const disabled = username.length && password.length;
 
+  function handleLogin(event) {
+    event.preventDefault();
+    navigate("/home");
+  }
+
   return (
     <Container className="container">
       <BackButton />
 
       <Heading>Cadastro</Heading>
-      <form>
+      <form onSubmit={handleLogin}>
         <Input
           placeholder="Nome"
           label="Digite seu usuário"
@@ -45,7 +50,7 @@ export function Registration() {
           value={password}
           onChange={({ target }) => setPassword(target.value)}
         />
-        <Button disabled={!disabled} onClick={() => navigate("/home")}>
+        <Button disabled={!disabled} type="submit">
           Login
         </Button>
       </form>

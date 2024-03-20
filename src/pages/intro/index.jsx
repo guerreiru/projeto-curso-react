@@ -11,7 +11,7 @@ export function Intro() {
     }, 2000);
 
     return () => clearTimeout(redirectTimeout);
-  }, []);
+  }, [navigate]);
 
   // Definindo as telas com setStep
 

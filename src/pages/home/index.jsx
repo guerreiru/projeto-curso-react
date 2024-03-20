@@ -5,10 +5,12 @@ import { Avatar } from "../../components/avatar";
 import { BottomMenu } from "../../components/bottomMenu";
 import { NewTaskModal } from "../../components/newTaskModal";
 import { Text } from "../../components/text";
-import { Container, Header } from "./style";
+import { Container, Header, NoData } from "./style";
+import { Task } from "../../components/task";
 
 export function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [tasks, setTasks] = useState([]);
 
   // Função para abrir o modal
   function openModal() {
@@ -20,11 +22,37 @@ export function Home() {
     setIsModalOpen(false);
   }
 
-  // Função para lidar com o envio do formulário dentro do modal
-  function handleAddTask(taskName) {
-    // Aqui você pode adicionar a lógica para adicionar a nova tarefa
-    console.log("Nova tarefa:", taskName);
-  }
+  const addTask = (newTask) => {
+    if (newTask.name.trim() === "") {
+      alert("A tarefa está vázia!");
+      return;
+    }
+
+    // Verifica se o nome da nova tarefa já existe na lista de tarefas
+    if (
+      tasks.some(
+        (task) => task.name.toLowerCase() === newTask.name.toLowerCase()
+      )
+    ) {
+      alert("Essa tarefa já existe!");
+      return;
+    }
+
+    setTasks([...tasks, newTask]);
+    setIsModalOpen(false);
+    return "success";
+  };
+
+  const handleCompleteTask = (taskId) => {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === taskId) {
+          return { ...task, completed: !task.completed };
+        }
+        return task;
+      })
+    );
+  };
 
   return (
     <Container className="container-full">
@@ -35,14 +63,28 @@ export function Home() {
       </Header>
 
       <div className="content">
-        <div className="img-wrapper">
-          <img src={ChecklistImg} />
-        </div>
+        {tasks.length > 0 && (
+          <>
+            {tasks.map((task) => (
+              <div key={task.id} className="tasks-list">
+                <Task task={task} onComplete={handleCompleteTask} />
+              </div>
+            ))}
+          </>
+        )}
 
-        <div className="tasks-list">
-          <Text>O que você quer fazer hoje?</Text>
-          <Text>Toque em + para adicionar suas tarefas</Text>
-        </div>
+        {!tasks.length && (
+          <NoData>
+            <div className="img-wrapper">
+              <img src={ChecklistImg} />
+            </div>
+
+            <div>
+              <Text>O que você quer fazer hoje?</Text>
+              <Text>Toque em + para adicionar suas tarefas</Text>
+            </div>
+          </NoData>
+        )}
       </div>
 
       <footer>
@@ -52,7 +94,7 @@ export function Home() {
       <NewTaskModal
         isOpen={isModalOpen}
         onClose={closeModal}
-        onAddTask={handleAddTask}
+        onAddTask={addTask}
       />
     </Container>
   );

@@ -43,11 +43,11 @@ export const Footer = styled.footer`
   align-items: flex-end;
   justify-content: space-between;
 
+  padding: 16px 24px;
+
   @media (max-width: 768px) {
     flex: 1;
   }
-  margin-bottom: 42px;
-  padding-right: 24px;
 `;
 
 export const StepIndicatorWrapper = styled.div`

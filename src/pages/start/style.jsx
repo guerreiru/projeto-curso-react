@@ -26,7 +26,6 @@ export const Header = styled.header`
 export const Footer = styled.footer`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   flex-direction: column;
   gap: 24px;
   padding: 0 24px;
@@ -39,6 +38,6 @@ export const Footer = styled.footer`
 
   button {
     width: 100%;
-    max-width: 320px;
+    max-width: 600px;
   }
 `;
