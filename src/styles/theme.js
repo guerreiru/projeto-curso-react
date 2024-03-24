@@ -9,6 +9,7 @@ export const theme = {
     purple500: "rgba(134,135,231,0.5)",
     white400: "rgba(255,255,255,0.4)",
     white900: "rgba(255,255,255,0.9)",
+    danger: "#ff4949",
   },
   fonts: {
     family: "Lato, sans-serif",

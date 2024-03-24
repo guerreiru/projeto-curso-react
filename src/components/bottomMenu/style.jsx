@@ -13,11 +13,15 @@ export const Container = styled.nav`
     position: relative;
 
     li {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      row-gap: 8px;
-      font-size: 12px;
+      a {
+        color: ${theme.colors.white900};
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        row-gap: 8px;
+        font-size: 12px;
+      }
     }
   }
 `;
@@ -42,4 +46,6 @@ export const NewTaskButton = styled.div`
   &:active {
     filter: brightness(0.6);
   }
+
+  box-shadow: 0px 10px 10px -3px ${theme.colors.darkGray};
 `;

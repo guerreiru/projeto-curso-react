@@ -5,6 +5,7 @@ import { Registration } from "../pages/registration";
 import { Home } from "../pages/home";
 import { Start } from "../pages/start";
 import { Onboarding } from "../pages/onboarding";
+import { Profile } from "../pages/profile";
 
 export function Router() {
   return (
@@ -16,6 +17,7 @@ export function Router() {
         <Route path="onboarding" element={<Onboarding />} />
         <Route path="registration" element={<Registration />} />
         <Route path="home" element={<Home />} />
+        <Route path="profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

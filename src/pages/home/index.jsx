@@ -1,23 +1,33 @@
 import { FunnelSimple } from "@phosphor-icons/react";
-import { useState } from "react";
-import ChecklistImg from "../../assets/checklist.svg";
+import { useEffect, useState } from "react";
 import { Avatar } from "../../components/avatar";
 import { BottomMenu } from "../../components/bottomMenu";
 import { NewTaskModal } from "../../components/newTaskModal";
 import { Text } from "../../components/text";
-import { Container, Header, NoData } from "./style";
-import { Task } from "../../components/task";
+import { Dropdown } from "./dropdown";
+import { NoData } from "./noData";
+import { Container, Content, Header } from "./style";
+import { TaskList } from "./taskList";
+import {
+  loadTasksFromLocalStorage,
+  saveTasksToLocalStorage,
+} from "../../utils";
+import { Link } from "react-router-dom";
 
 export function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(loadTasksFromLocalStorage());
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterOption, setFilterOption] = useState({
+    label: "todas",
+    value: "all",
+  });
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // Função para abrir o modal
   function openModal() {
     setIsModalOpen(true);
   }
 
-  // Função para fechar o modal
   function closeModal() {
     setIsModalOpen(false);
   }
@@ -28,19 +38,31 @@ export function Home() {
       return;
     }
 
-    // Verifica se o nome da nova tarefa já existe na lista de tarefas
     if (
       tasks.some(
-        (task) => task.name.toLowerCase() === newTask.name.toLowerCase()
+        (task) =>
+          task.name.trim().toLowerCase() === newTask.name.trim().toLowerCase()
       )
     ) {
       alert("Essa tarefa já existe!");
       return;
     }
 
-    setTasks([...tasks, newTask]);
+    setTasks([
+      ...tasks,
+      {
+        ...newTask,
+        name: newTask.name.trim(),
+      },
+    ]);
     setIsModalOpen(false);
+
     return "success";
+  };
+
+  const handleFilterChange = (option) => {
+    setFilterOption(option);
+    setDropdownOpen(false);
   };
 
   const handleCompleteTask = (taskId) => {
@@ -54,38 +76,63 @@ export function Home() {
     );
   };
 
+  const handleRemoveTask = (taskId) => {
+    setTasks(tasks.filter((task) => task.id !== taskId));
+  };
+
+  const filteredTasks = tasks.filter((task) => {
+    const nameMatches = task.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+
+    const isCompleted = task.completed;
+
+    return (
+      (filterOption.value === "all" ||
+        (filterOption.value === "completed" && isCompleted) ||
+        (filterOption.value === "not_completed" && !isCompleted)) &&
+      nameMatches
+    );
+  });
+
+  useEffect(() => {
+    saveTasksToLocalStorage(tasks);
+  }, [tasks]);
+
   return (
     <Container className="container-full">
       <Header>
         <nav>
-          <FunnelSimple size={20} weight="bold" /> Home <Avatar />
+          <FunnelSimple
+            size={20}
+            weight="bold"
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+          />
+          <Text>Home</Text>
+
+          <Link to="/profile">
+            <Avatar url="https://github.com/guerreiru.png" />
+          </Link>
+
+          {dropdownOpen && <Dropdown onClick={handleFilterChange} />}
         </nav>
       </Header>
 
-      <div className="content">
+      <Content>
         {tasks.length > 0 && (
           <>
-            {tasks.map((task) => (
-              <div key={task.id} className="tasks-list">
-                <Task task={task} onComplete={handleCompleteTask} />
-              </div>
-            ))}
+            <Text fontSize="12px">Mostrando {filterOption.label}</Text>
+            <TaskList
+              handleCompleteTask={handleCompleteTask}
+              handleRemoveTask={handleRemoveTask}
+              setSearch={setSearchTerm}
+              tasks={filteredTasks}
+            />
           </>
         )}
 
-        {!tasks.length && (
-          <NoData>
-            <div className="img-wrapper">
-              <img src={ChecklistImg} />
-            </div>
-
-            <div>
-              <Text>O que você quer fazer hoje?</Text>
-              <Text>Toque em + para adicionar suas tarefas</Text>
-            </div>
-          </NoData>
-        )}
-      </div>
+        {!tasks.length && <NoData />}
+      </Content>
 
       <footer>
         <BottomMenu onClickNewTask={openModal} />

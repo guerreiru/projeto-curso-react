@@ -1,6 +1,7 @@
 import { House, User, Plus } from "@phosphor-icons/react";
 import { Container, NewTaskButton } from "./style";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 export function BottomMenu({ onClickNewTask }) {
   function handleOnClickNewTask() {
@@ -11,17 +12,25 @@ export function BottomMenu({ onClickNewTask }) {
     <Container>
       <ul>
         <li>
-          <House size={24} weight="fill" />
-          Home
+          <Link to="/home">
+            <House size={24} weight="fill" />
+            Home
+          </Link>
         </li>
+
+        {onClickNewTask && (
+          <li>
+            <NewTaskButton onClick={handleOnClickNewTask}>
+              <Plus size={24} />
+            </NewTaskButton>
+          </li>
+        )}
+
         <li>
-          <NewTaskButton onClick={handleOnClickNewTask}>
-            <Plus size={24} />
-          </NewTaskButton>
-        </li>
-        <li>
-          <User size={24} />
-          Perfil
+          <Link to="/profile">
+            <User size={24} />
+            Perfil
+          </Link>
         </li>
       </ul>
     </Container>

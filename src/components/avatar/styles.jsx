@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 42px;
-  height: 42px;
+  width: ${({ $size }) => $size || "42px"};
+  height: ${({ $size }) => $size || "42px"};
   display: flex;
   align-items: center;
   justify-content: center;

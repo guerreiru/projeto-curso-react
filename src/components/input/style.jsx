@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
+export const Container = styled.div`
+  width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
+`;
+
 export const StyledInput = styled.input`
-  padding: 16px;
+  padding: ${({ $withIcon }) => ($withIcon ? "16px 16px 16px 48px" : "16px")};
   background-color: ${theme.colors.charcoalGray};
   border-radius: 4px;
   border: 1px solid ${theme.colors.mediumGray};
@@ -20,5 +24,14 @@ export const InputLabel = styled.label`
 `;
 
 export const InputWrapper = styled.div`
-  width: ${({ $fullWidth }) => ($fullWidth ? "100%" : "auto")};
+  position: relative;
+  display: flex;
+  align-items: center;
+`;
+
+export const IconWrapper = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 16px;
 `;

@@ -7,8 +7,8 @@ export const Container = styled.div`
   border-radius: 4px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
-  margin-bottom: 16px;
 
   .completed {
     text-decoration: line-through;
@@ -16,6 +16,10 @@ export const Container = styled.div`
 `;
 
 export const InputWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
   input[type="checkbox"] {
     display: none;
   }
@@ -34,4 +38,8 @@ export const InputWrapper = styled.div`
     background-color: ${theme.colors.primaryPurple};
     color: white;
   }
+`;
+
+export const Icon = styled.div`
+  cursor: pointer;
 `;
